@@ -82,6 +82,8 @@ function enemyPick(e)
 	$(".progress").show();
 	$("#enemyBar").attr("style", "width:100%"); // visually the enemy hp bar will be shown as 100% full instead of empty
 	$(".jumbotron").hide();
+
+	
 }
 
 

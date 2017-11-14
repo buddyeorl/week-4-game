@@ -67,14 +67,21 @@ height: 100%;
 {
   position: absolute;
   height: 400px;
-  top: 40%;
   left: 50%;
+  size: 100%;
 }
 #enemyButtonChar
 {
   position: absolute;
   height: 400px;
-  top: 40%;
   right: 50%;
+  size: 100%;
 }
+/*.bg1 
+{
+  background-image: url(../images/background.gif);
+  background-size: 100%;
+}   */  
+
+
 
