@@ -47,6 +47,7 @@ function chooseCharacter()
 
 function mainPick(a)
 {
+	$(".jumbotron").show();
 	originalMain = Object.values(gameCharacters)[a][1];
 	currentHealthMain = Object.values(gameCharacters)[a][1];
 	currentAttackMain = Object.values(gameCharacters)[a][2];
@@ -54,6 +55,7 @@ function mainPick(a)
 	winMessage1 = Object.values(gameCharacters)[a][0];
 	mainSet = true;
 	enemySet = false;
+	$(".choice").html("You Chose " + Object.values(gameCharacters)[a][0] + " now Click the character you want to Fight");
 	console.log("click main pick" );
 	console.log("main health" , currentHealthMain);
 	$("#mainButtonChar").attr("src", Object.values(gameCharacters)[a][4]);
@@ -79,6 +81,7 @@ function enemyPick(e)
 	$("#healthEnemy").show();
 	$(".progress").show();
 	$("#enemyBar").attr("style", "width:100%"); // visually the enemy hp bar will be shown as 100% full instead of empty
+	$(".jumbotron").hide();
 }
 
 
@@ -86,9 +89,12 @@ function enemyPick(e)
 
 function isWin()
 {
+
 	if (currentHealthMain < 1 && currentHealthEnemy < 1)
 	{	
-
+		$(".jumbotron").show();
+		$(".choice").html("");
+		$(".display-3").html("IT'S A TIE");
 		$(".progress").hide();	
 		$("#mainButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").animate({ opacity: 1 });
@@ -114,10 +120,13 @@ function isWin()
 		enemyDefeats = 0;
 		resetGame(); // this will reset the game variables except win and lose counters
 		$("#mainBar").attr("style", "width:100%"); // visually the main hp bar will be shown as 100% full instead of empty	
-		$("#winMessage").html("It's a tie, you both suck");
+		//$("#winMessage").html("It's a tie, you both suck");
 	}
 	if (currentHealthMain < 1 && currentHealthEnemy > 0)
 	{	
+		$(".jumbotron").show();
+		$(".choice").html("");
+		$(".display-3").html("You lost against" + winMessage2);
 		$(".progress").hide();	
 		$("#mainButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").animate({ opacity: 1 });
@@ -130,7 +139,7 @@ function isWin()
 		arrayHide = [0,false,false,false,false];
 		// currentHealthMain = "Main Character Loses";
 		// currentHealthEnemy="Enemy Wins";
-		$("#winMessage").html("You " + winMessage1+ " lost to " +winMessage2);
+		//$("#winMessage").html("You " + winMessage1+ " lost to " +winMessage2);
 		currentHealthMain; // reset main health
 		newAttack = 0;
 		$("#character1").show();
@@ -149,6 +158,9 @@ function isWin()
 	}		
 	if (currentHealthEnemy < 1 && currentHealthMain > 0)
 	{ 
+		setTimeout(waitfunct, 1000);
+		$(".choice").html("You Defetead " + winMessage2);
+		$(".jumbotron").show();
 		$(".progress").hide();
 		$("#mainButtonChar").hide();
 		$("#enemyButtonChar").hide();
@@ -159,7 +171,7 @@ function isWin()
 		$("#enemyButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").hide();
 		$("#showCounterAttack").hide(); // this will hide the enemy health when 0
-		$("#winMessage").html("You " + winMessage1+ " won against " +winMessage2);
+		//$("#winMessage").html("You " + winMessage1+ " won against " +winMessage2);
 		enemyDefeats++;
 		console.log("enemyDefeats ", enemyDefeats);
 		for (var i=1; i<5;i++) // note this if starts at 1
@@ -176,14 +188,19 @@ function isWin()
 
 		if (enemyDefeats === 3)
 		{
+			$("#mainButtonChar").hide();
+			$(".jumbotron").show();
+			$(".display-3").html("YOU WIN!!!");
+			$(".choice").html("You Defetead " + winMessage2);
+			setTimeout(waitfunct, 2000);
+			$(".choice").html("Play again?");
 			$(".progress").hide();
 			$("#mainBar").attr("style", "width:100%"); // visually the main hp bar will be shown as 100% full instead of empty
-			$("#mainButtonChar").show();
 			$("#enemyButtonChar").hide();
 			$("#mainButtonChar").animate({ opacity: 1 });
 			$("#enemyButtonChar").animate({ opacity: 1 });
 			$("#enemyButtonChar").hide();
-			$("#winMessage").html("You " + winMessage1+ " are the Worst Politician, you beat them all ");
+			// $("#winMessage").html("You " + winMessage1+ " are the Worst Politician, you beat them all ");
 			currentHealthMain; // reset main health
 			newAttack = 0; // reset main attack
 			arrayHide = [0,false,false,false,false];
@@ -214,11 +231,15 @@ var mainBar = (currentHealthMain/originalMain) * 100; //this will be used to set
 var enemyBar = (currentHealthEnemy/originalEnemy) * 100; //this will be used to set the enemy health bar in %
 $("#mainButtonChar").animate({ opacity: mainOpacity });
 $("#enemyButtonChar").animate({ opacity: enemyOpacity });
-
 $("#mainBar").attr("style", "width:" + mainBar +"%"); // this lines will be used to edit the bootstrap progress bar representing HP
 $("#enemyBar").attr("style", "width:" + enemyBar +"%");// this lines will be used to edit the bootstrap progress bar representing HP
-}
 
+}
+function waitfunct()
+{
+$(".choice").html("");
+
+}
 
 
 
@@ -249,6 +270,7 @@ $(document).ready(function()
 			$("#character1").hide();
 			arrayHide[0] = 1; //this value will be used to compare in isWin to prevent Main Character to be shown after hidden
 			}
+			event.stopImmediatePropagation();
 		});  
 		$("#character2").on("dblclick", function() 
 		{
@@ -417,10 +439,8 @@ $(document).ready(function()
 				console.log("Conter Attack is " + counterAttack);
 				console.log("Enemy Health is " + currentHealthEnemy);
 				currentAttackMain += counterAttack;
-
 				//$("#showCounterAttack").html(counterAttack);
 				//$("#showAttack").html("changed");
-
 			}
 			charAnimation();
 			isWin();

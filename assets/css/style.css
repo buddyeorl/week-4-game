@@ -67,12 +67,14 @@ height: 100%;
 {
   position: absolute;
   height: 400px;
+  top: 40%;
   left: 50%;
 }
 #enemyButtonChar
 {
   position: absolute;
   height: 400px;
+  top: 40%;
   right: 50%;
 }
 
