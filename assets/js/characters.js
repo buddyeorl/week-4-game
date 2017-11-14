@@ -21,7 +21,5 @@ var gameCharacters =
 // 	character7:[name,healthPoints,attackPower,counterAttack],
 // };
 
-// GOT THIS ARRAY FROM THE BILLBOARD.COM TOP 100 AS OF 
-// NOV 05 2017 I REMOVED ALL NAMES THAT INCLUDED SPECIAL CHARACTERS
 
 

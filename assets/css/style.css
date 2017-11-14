@@ -44,7 +44,7 @@ html,body
 {
   position: relative;
   height:100%;
-  overflow:initial;
+  overflow:scroll;
 }
 
 /*.container
@@ -63,9 +63,16 @@ margin-bottom: 40px;
 height: 100%;
 }
 
-/*.mainGame
+#mainButtonChar
 {
-  float:left; width:25%;}
+  position: absolute;
+  height: 400px;
+  left: 50%;
 }
-*/
+#enemyButtonChar
+{
+  position: absolute;
+  height: 400px;
+  right: 50%;
+}
 
