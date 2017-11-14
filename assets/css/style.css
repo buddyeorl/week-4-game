@@ -1,7 +1,10 @@
 
 /* ADDED FEATURES
 -------------------------------------------------- */
-
+/* This line will make all box like elements to keep the given size even if margins or paddings are added */
+*{
+    box-sizing: border-box;
+}
 /*Social Icons size is set below*/
 .snimages
 {
@@ -54,6 +57,19 @@ min-height: 100%;
 overflow:inherit;
 
 }*/
+.jumbotron
+{
+  overflow:hide;
+  font-size: 2vw;
+}
+.pjumbotron
+{
+font-size: auto;
+}
+.h1jumbotron
+{
+   font-size: 1vw; 
+}
 
 .game
 {
@@ -61,6 +77,14 @@ padding-top: 20px;
 padding-bottom: 20px;
 margin-bottom: 40px;
 height: 100%;
+}
+.gameCenter
+{
+padding-top: 0%;
+padding-bottom: 0%;
+margin-bottom: 0%;
+width: 24%; 
+font-size: 5%
 }
 
 #mainButtonChar
