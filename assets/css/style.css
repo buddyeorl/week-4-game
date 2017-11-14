@@ -13,17 +13,17 @@
 /* Social Icons are inside this footer which is above the lowest footer*/
 .footersn
 {
-  position: absolute;
+  position:fixed;
   bottom: 0px;
+  margin-top: 200px;
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 0px;
   width: 100%;
-  height: 100px;
-  padding: 1rem;
   background: #333;
   max-width: 100%;
   text-align: center;
+  overflow:auto;
 }
 
 /*  header sticky position is set below*/
@@ -42,20 +42,30 @@
 
 html,body
 {
+  position: relative;
   height:100%;
-  overflow:scroll;
+  overflow:initial;
 }
 
-.container
+/*.container
 {
 height:100%;
-min-height: 800px;
+min-height: 100%;
 overflow:inherit;
 
-}
+}*/
 
 .game
 {
-height:400px;
-width:100%; 
+padding-top: 20px;
+padding-bottom: 20px;
+margin-bottom: 40px;
+height: 100%;
 }
+
+/*.mainGame
+{
+  float:left; width:25%;}
+}
+*/
+

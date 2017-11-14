@@ -50,34 +50,59 @@
 
         <div>
 
-          <div>
-            <button id="character1">Character1</button>
+          <div class="game center">
+            <div id="character1" style="display: inline-block">
+            <img  src="assets/images/trump.png" alt="">
+            <h2>Trump</h2>
+            </div>
+            <div id="character2" style="display: inline-block">
+            <img src="assets/images/hillary.png" alt="">
+            <h2>Hillary</h2>
+            </div>
+            <div id="character3" style="display: inline-block">
+            <img src="assets/images/putin.png" alt="">
+            <h2>Putin</h2>
+            </div>
+            <div id="character4" style="display: inline-block">
+            <img src="assets/images/xijinping.png" alt="">
+            <h2>Xi Jinping</h2>
+            </div>
+<!--             <button id="character1">Character1</button>
             <button id="character2">Character2</button>
             <button id="character3">Character3</button> 
-            <button id="character4">Character4</button>       
-            <h1 id="showAttack">points here</h1>
-            <h1 id="healthMain">Main Health here</h1>
-          </div>
+            <button id="character4">Character4</button>      -->  
 
-          <div>
-            <h1 id="showCounterAttack">points here</h1>
-            <h1 id="healthEnemy">Enemy Health here</h1>
           </div>
-          <div class="game row">
-            <div class="col-sm-3">
-            <button class="game" id="mainButtonChar">some text here</button>
-            </div>
-            <div class="col-sm-6 center">
+            <div class="col-sm-12 center">
             <button id="attackButton">attack button</button>
             </div>
-            <div class="col-sm-3">
-            <button class="game" id="enemyButtonChar">some text here</button>
+          <div>
+
+          <div class="row game">
+            <div class="col-sm-5 center">
+           <!--  <button class="game" id="mainButtonChar">some text here</button> -->
+            <img class="game" id="mainButtonChar" src="" alt="">
+            <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%" id="mainBar"></div>
+            </div>
+            <h1 id="showAttack"></h1>
+            <h1 id="healthMain"></h1>
+            </div>
+            <div class="col-sm-2 center">
+            <h1 id="winMessage"></h1>
+            </div>
+            <div class="col-sm-5 center">
+            <!-- <button class="game" id="enemyButtonChar">some text here</button> -->
+            <img class="game" id="enemyButtonChar" src="" alt="">
+            <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="120" style="width: 100%" id="enemyBar"></div>
+            </div>
+            <h1 id="showCounterAttack"></h1>
+            <h1 id="healthEnemy"></h1>
             </div>
           </div>
-        </div>
 
-   <container>
-    <!-- START FOOTER -->
+        </div>
     <footer class="footersn">
           <a href="https://github.com/buddyeorl" target="_blank"><img class="snimages" src="assets/images/githubicon.ico" alt=""></a>
           <a href="https://twitter.com/A_Lizar" target="_blank"><img class="snimages" src="assets/images/twittericon.ico" alt=""></a>
@@ -85,6 +110,9 @@
           <a href="https://plus.google.com/u/0/112189978605028117374" target="_blank"><img class="snimages" src="assets/images/googleplusicon.ico" alt=""></a>
           <p>© Copyright 2017 Alexander Lizarraga </p>
     </footer>
+   <container>
+    <!-- START FOOTER -->
+
     <!-- END FOOTER -->
    <!-- SCRIPTS HERE -->
 <!--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

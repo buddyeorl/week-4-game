@@ -15,10 +15,11 @@ var loses = 0;
 var gameActive = false;
 var enemyDefeats = 0;
 var arrayHide = [0,false,false,false,false];
+var winMessage1 = "";
+var winMessage2 = "";
 
 function resetGame()
 {
-	counterAttack = 0;
 	attackEnemy = 0;  
 	currentHealthEnemy;
 	currentAttackEnemy;
@@ -48,22 +49,30 @@ function mainPick(a)
 	originalMain = Object.values(gameCharacters)[a][1];
 	currentHealthMain = Object.values(gameCharacters)[a][1];
 	currentAttackMain = Object.values(gameCharacters)[a][2];
+	counterAttack = currentAttackMain;
+	winMessage1 = Object.values(gameCharacters)[a][0];
 	mainSet = true;
 	enemySet = false;
 	console.log("click main pick" );
 	console.log("main health" , currentHealthMain);
+	$("#mainButtonChar").attr("src", Object.values(gameCharacters)[a][4]);
+	$("#mainButtonChar").show();
 }
 function enemyPick(e)
 {
 	originalEnemy = Object.values(gameCharacters)[e][1];
 	currentHealthEnemy =Object.values(gameCharacters)[e][1];
 	currentAttackEnemy =Object.values(gameCharacters)[e][3];
+	winMessage2 = Object.values(gameCharacters)[e][0];
 	enemySet = true;
 	console.log("click enemy pick");
-	if (counterAttack != 0 )
-	{
-		$("#showCounterAttack").show();
-	}
+	$("#enemyButtonChar").attr("src", Object.values(gameCharacters)[e][4]);
+	$("#enemyButtonChar").show();
+	$("#mainButtonChar").show();
+	$("#healthMain").show();
+	$("#showAttack").show();
+	$("#showCounterAttack").show();
+	$("#healthEnemy").show();
 }
 
 
@@ -71,14 +80,21 @@ function enemyPick(e)
 
 function isWin()
 {
-	currentHealthMain=currentHealthMain - counterAttack;
+
 	if (currentHealthMain < 1)
-	{
+	{		
 		$("#mainButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").animate({ opacity: 1 });
+		$("#mainButtonChar").hide();
+		$("#enemyButtonChar").hide();
+		$("#healthMain").hide();
+		$("#showAttack").hide();
+		$("#showCounterAttack").hide();
+		$("#healthEnemy").hide();
 		arrayHide = [0,false,false,false,false];
-		currentHealthMain = "Main Character Loses";
-		currentHealthEnemy="Enemy Wins";
+		// currentHealthMain = "Main Character Loses";
+		// currentHealthEnemy="Enemy Wins";
+		$("#winMessage").html("You " + winMessage1+ " lost to " +winMessage2);
 		currentHealthMain; // reset main health
 		newAttack = 0;
 		$("#character1").show();
@@ -90,17 +106,23 @@ function isWin()
 		console.log("loses " + loses);
 		gameActive = false; // this line will prevent some text from diaplay in the html
 		mainSet = false;
+		counterAttack = 0;
 		resetGame(); // this will reset the game variables except win and lose counters
-	}	
-	currentHealthEnemy=currentHealthEnemy - newAttack;	
+	}		
 	if (currentHealthEnemy < 1)
 	{ 
+		$("#mainButtonChar").hide();
+		$("#enemyButtonChar").hide();
+		$("#healthMain").hide();
+		$("#showAttack").hide();
+		$("#showCounterAttack").hide();
+		$("#healthEnemy").hide();
 		$("#enemyButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").hide();
 		$("#showCounterAttack").hide(); // this will hide the enemy health when 0
+		$("#winMessage").html("You " + winMessage1+ " won against " +winMessage2);
 		enemyDefeats++;
 		console.log("enemyDefeats ", enemyDefeats);
-		currentHealthEnemy="Enemy Loses";
 		for (var i=1; i<5;i++) // note this if starts at 1
 		{
 			if (arrayHide[i] === false)
@@ -115,9 +137,12 @@ function isWin()
 
 		if (enemyDefeats === 3)
 		{
+			$("#mainButtonChar").show();
+			$("#enemyButtonChar").hide();
 			$("#mainButtonChar").animate({ opacity: 1 });
 			$("#enemyButtonChar").animate({ opacity: 1 });
-			$("#enemyButtonChar").show();
+			$("#enemyButtonChar").hide();
+			$("#winMessage").html("You " + winMessage1+ " are the Worst Politician, you beat them all ");
 			currentHealthMain; // reset main health
 			newAttack = 0; // reset main attack
 			arrayHide = [0,false,false,false,false];
@@ -129,6 +154,7 @@ function isWin()
 			$("#character3").show();
 			$("#character4").show();
 			enemyDefeats = 0;
+			counterAttack = 0;
 		}
 		wins++;
 		console.log("wins " + wins);
@@ -143,9 +169,13 @@ function charAnimation()
 {
 var mainOpacity = currentHealthMain/originalMain;
 var enemyOpacity = currentHealthEnemy/originalEnemy;
+var mainBar = (currentHealthMain/originalMain) * 100; //this will be used to set the enemy health bar in %
+var enemyBar = (currentHealthEnemy/originalEnemy) * 100; //this will be used to set the enemy health bar in %
 $("#mainButtonChar").animate({ opacity: mainOpacity });
 $("#enemyButtonChar").animate({ opacity: enemyOpacity });
 
+$("#mainBar").attr("style", "width:" + mainBar +"%"); // this lines will be used to edit the bootstrap progress bar representing HP
+$("#enemyBar").attr("style", "width:" + enemyBar +"%");// this lines will be used to edit the bootstrap progress bar representing HP
 }
 
 
@@ -156,7 +186,8 @@ $("#enemyButtonChar").animate({ opacity: enemyOpacity });
 
 
 $("#attackButton").hide();
-
+$("#mainButtonChar").hide();
+$("#enemyButtonChar").hide();
 $(document).ready(function() 
 {
 
@@ -172,6 +203,7 @@ $(document).ready(function()
 			{
 			console.log("dblclick" + mainSet);
 			console.log("clicking character1");
+			$("#winMessage").html(" "); // this will clear the winning message
 			mainPick(0);//  0 represents the first character in the charcater's array
 			//$("#character1").off("click");
 			$("#character1").hide();
@@ -183,6 +215,7 @@ $(document).ready(function()
 			if (mainSet === false)
 			{
 			console.log("clicking character2");
+			$("#winMessage").html(" "); // this will clear the winning message
 			mainPick(1); //  1 represents the second character in the charcater's array
 			//$("#character2").off("click");
 			$("#character2").hide();
@@ -195,6 +228,7 @@ $(document).ready(function()
 			{
 			console.log("dblclick" + mainSet);
 			console.log("clicking character3");
+			$("#winMessage").html(" "); // this will clear the winning message
 			mainPick(2);//  0 represents the first character in the charcater's array
 			//$("#character1").off("click");
 			$("#character3").hide();
@@ -206,6 +240,7 @@ $(document).ready(function()
 			if (mainSet === false)
 			{
 			console.log("clicking character4");
+			$("#winMessage").html(" "); // this will clear the winning message
 			mainPick(3); //  1 represents the second character in the charcater's array
 			//$("#character2").off("click");
 			$("#character4").hide();
@@ -214,11 +249,44 @@ $(document).ready(function()
 		});  
 	
 		
+
+//===================================================================================//
+// Character mouseover animation
+
+		$("#character1").mouseenter( function()
+		{
+		$("#character1").animate( {opacity: "0.5"}, 50);
+		});	
+		$("#character1").mouseleave( function()
+		{
+		$("#character1").animate( {opacity: "1"}, 50);
+		});	
+		$("#character2").mouseenter( function()
+		{
+		$("#character2").animate( {opacity: "0.5"}, 50);
+		});	
+		$("#character2").mouseleave( function()
+		{
+		$("#character2").animate( {opacity: "1"}, 50);
+		});	
+		$("#character3").mouseenter( function()
+		{
+		$("#character3").animate( {opacity: "0.5"}, 50);
+		});	
+		$("#character3").mouseleave( function()
+		{
+		$("#character3").animate( {opacity: "1"}, 50);
+		});	
+		$("#character4").mouseenter( function()
+		{
+		$("#character4").animate( {opacity: "0.5"}, 50);
+		});	
+		$("#character4").mouseleave( function()
+		{
+		$("#character4").animate( {opacity: "1"}, 50);
+		});	
 //===================================================================================//
 // Enemy Character is going to be picked here
-
-
-
 
 		$("#character1").on("click", function()
 		{
@@ -289,48 +357,37 @@ $(document).ready(function()
 	
 
 
-		if (counterAttack === 0 )
-		{
-			$("#showCounterAttack").hide();
-		}
         
 
-		$("#attackButton").on("click", function()
+		$("#attackButton").click(function()
 		{
-			newAttack = newAttack + currentAttackMain;
-			console.log("new Attack is" + newAttack);
-			console.log("new health is" + currentHealthMain)
-			counterAttack=currentAttackEnemy;
-			console.log("Conter Attack is " + counterAttack);
-			console.log("Enemy Health is " + currentHealthEnemy);
-		if (counterAttack != 0 )
-		{
-			$("#showCounterAttack").show();
-		}
-
+			$("#mainButtonChar").animate( {height: "130%"}, 200);
+			$("#mainButtonChar").animate( {height: "100%"}, 200);
+			$("#enemyButtonChar").animate( {height: "50%"}, 200);
+			$("#enemyButtonChar").animate( {height: "100%"}, 200);
 	//======================================================================================//
 	// This will refresh health of both Main and Enemy  //
 			if (gameActive == true) // this will check if the game is active 
 			{
-				$("#showAttack").html("Main Attack " + newAttack);
-				$("#showCounterAttack").html("Enemy Attack " + counterAttack);
-				$("#healthMain").html("Main HP " + currentHealthMain);
-				$("#healthEnemy").html("Enemy HP " + currentHealthEnemy);
-				if (counterAttack >= currentHealthMain )
-				{
-					currentHealthMain = 0;
-					$("#healthMain").html("Main HP ");
-				}
-				if (newAttack >= currentHealthEnemy )
-				{
-				currentHealthEnemy = 0;
-				$("#healthEnemy").html("Enemy HP ");
-				}
+				//newAttack = newAttack + currentAttackMain;
+				currentHealthMain=currentHealthMain - currentAttackEnemy;
+				currentHealthEnemy=currentHealthEnemy - currentAttackMain;
+				console.log("new Attack is" + currentAttackMain);
+				console.log("new health is" + currentHealthMain)
+				console.log("Conter Attack is " + counterAttack);
+				console.log("Enemy Health is " + currentHealthEnemy);
+				currentAttackMain += counterAttack;
+
 				//$("#showCounterAttack").html(counterAttack);
 				//$("#showAttack").html("changed");
-				charAnimation();
-				isWin();
+
 			}
+			charAnimation();
+			isWin();
+			$("#healthMain").html("Main HP " + currentHealthMain);
+			$("#showAttack").html("Main Attack " + (currentAttackMain));
+			$("#showCounterAttack").html("Enemy Attack " + currentAttackEnemy);
+			$("#healthEnemy").html("Enemy HP " + currentHealthEnemy);
 		});
 
 });
