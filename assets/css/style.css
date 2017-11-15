@@ -112,9 +112,14 @@ padding-bottom: 3%;
 margin-bottom: 3%;
 top: 47%;
 left: 0px;
-
-
+-webkit-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+-webkit-animation: filter-animation 5s infinite;
 }
+
+
+
+
 #enemyButtonChar
 {
 position: absolute;
@@ -124,8 +129,26 @@ padding-bottom: 3%;
 margin-bottom: 3%;
 top: 47%;
 right: 0px;
-
+-webkit-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+-webkit-animation: filter-animation 5s infinite;
 }
+
+@-webkit-keyframes filter-animation {
+  0% {
+    -webkit-filter: grayscale(0) saturate(2);
+  }
+  
+  50% {
+    -webkit-filter: grayscale(1) saturate(8);
+  }
+  
+  100% {
+    -webkit-filter: grayscale(0) saturate(2);
+  }
+}
+
+
 .bg1 
 {
   background-image: url(../images/background.gif);
