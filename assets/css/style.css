@@ -87,25 +87,53 @@ width: 24%;
 font-size: 5%
 }
 
+.fightCenter
+{ 
+  min-height: 100%;
+}
+
+.hpBarMain
+{
+width: 45%; 
+float:left;
+}
+.hpBarEnemy
+{
+width: 45%; 
+float:right;
+}
+
 #mainButtonChar
 {
-  position: absolute;
-  height: 400px;
-  left: 50%;
-  size: 100%;
+position: absolute;
+max-width: 12%;
+padding-top: 3%;
+padding-bottom: 3%;
+margin-bottom: 3%;
+top: 47%;
+left: 0px;
+
+
 }
 #enemyButtonChar
 {
-  position: absolute;
-  height: 400px;
-  right: 50%;
-  size: 100%;
+position: absolute;
+max-width: 12%;
+padding-top: 3%;
+padding-bottom: 3%;
+margin-bottom: 3%;
+top: 47%;
+right: 0px;
+
 }
-/*.bg1 
+.bg1 
 {
   background-image: url(../images/background.gif);
   background-size: 100%;
-}   */  
+  background-repeat:no-repeat;
+  background-position:left center;
+  overflow:scroll;
+} 
 
 
 

@@ -16,8 +16,11 @@
 
   </head>
   <body class="bg1">
-<div class="backgrounddiv"></div>
-<!-- START THE HEADER -->
+    <div class="backgrounddiv"></div>
+
+
+    <!-- HEADER STARTS HERE -->
+    <!-- ==================================================================================== -->
     <header class="masthead">
       <!-- START NAVIGATION BAR -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" >
@@ -45,7 +48,10 @@
       </nav> 
       <!-- START NAVIGATION BAR -->
     </header>
-  	<!-- END THE HEADER -->
+    <!-- HEADER ENDS HERE -->
+    <!-- ==================================================================================== -->
+
+
     <div class="jumbotron">
       <h1 class="display-3 center progress-bar progress-bar-striped progress-bar-animated bg-info pjumbotron">4 Week Assignment</h1>
       <h6 class="center">To play you need to DOUBLE CLICK your character, once selected you will need to SINGLE CLICK on the remaining characters to start the fight, as soon as you defeat an enemy, you'll have the chance to pick another enemy until you have defeated them all or you have lost all your HP.</h7>
@@ -54,8 +60,9 @@
     </div>
     <container class="bg" >
 
+        <!-- CHARACTER GAME CENTER STARTS HERE -->
+        <!-- ==================================================================================== -->
         <div>
-
           <div class="game center">
             <div class="gameCenter" id="character1" style="display: inline-block">
             <img class="gameCenter" src="assets/images/trump.png" alt="">
@@ -73,41 +80,54 @@
             <img class="gameCenter" src="assets/images/xijinping.png" alt="">
             <h4>Xi Jinping</h4>
             </div>
-<!--             <button id="character1">Character1</button>
-            <button id="character2">Character2</button>
-            <button id="character3">Character3</button> 
-            <button id="character4">Character4</button>      -->  
-
         </div>
-            <div class="col-sm-12 center">
-              <button id="attackButton"  type="button" class="btn btn-success">attack button</button>
-            </div>
+        <!-- CHARACTER GAME CENTER ENDS HERE -->
+        <!-- ==================================================================================== -->
+
+            
+        <!-- ATTACK BUTTON STARTS HERE -->
+        <!-- ==================================================================================== -->
+        <div class="col-sm-12 center">
+          <button id="attackButton"  type="button" class="btn btn-success">attack button</button>
+        </div>
+        <!-- ATTACK BUTTON ENDS HERE -->
+        <!-- ==================================================================================== -->   
+
             <div>
-              <div class="row game">
-                <div class="col-sm-5 center">
-           <!--  <button class="game" id="mainButtonChar">some text here</button> -->
-                  <img class="game" id="mainButtonChar" src="" alt="">
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%" id="mainBar"></div>
+              <!-- ==================================================================================== -->
+              <!-- HEALTH BAR STARTS HERE -->
+              <div>
+                  <h4 class="hpBarMain" style="color:white;" id="showAttack"></h4>
+                  <h4 class="hpBarEnemy" style="color:white;" id="showCounterAttack"></h4>
+                  
+                  <div class="progress hpBarMain">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%" id="mainBar"></div>
                   </div>
-                  <h1 id="showAttack"></h1>
-                  <h1 id="healthMain"></h1>
+                  <div class="progress hpBarEnemy">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%" id="enemyBar"></div>
+                  </div>
+
                 </div>
-              <div class="col-sm-2 center">
-                <h1 id="winMessage"></h1>
               </div>
-            <div class="col-sm-5 center">
-              <!-- <button class="game" id="enemyButtonChar">some text here</button> -->
-              <img class="game" id="enemyButtonChar" src="" alt="">
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="120" style="width: 100%" id="enemyBar"></div>
+              <!-- HEALTH BARS END HERE -->
+              <!-- ==================================================================================== -->
+
+
+              <!-- ==================================================================================== -->
+              <!-- FIGHT CHARACTERS DISPLAY START HERE -->
+              <div class="fightCenter">
+                  
+                    <img class="img-fluid mx-auto" id="mainButtonChar" src="" alt="">
+                    <img class="img-fluid mx-auto" id="enemyButtonChar" src="" alt="">
+                  
               </div>
-              <h1 id="showCounterAttack"></h1>
-              <h1 id="healthEnemy"></h1>
-            </div>
+              <!-- FIGHT CHARACTERS DISPLAY END HERE -->
+              <!-- ==================================================================================== -->
           </div>
 
         </div>
+    <!-- FOOTER STARTS HERE -->
+    <!-- ==================================================================================== -->
     <footer class="footersn">
           <a href="https://github.com/buddyeorl" target="_blank"><img class="snimages" src="assets/images/githubicon.ico" alt=""></a>
           <a href="https://twitter.com/A_Lizar" target="_blank"><img class="snimages" src="assets/images/twittericon.ico" alt=""></a>
@@ -115,6 +135,8 @@
           <a href="https://plus.google.com/u/0/112189978605028117374" target="_blank"><img class="snimages" src="assets/images/googleplusicon.ico" alt=""></a>
           <p>© Copyright 2017 Alexander Lizarraga </p>
     </footer>
+    <!-- FOOTER ENDS HERE -->
+    <!-- ==================================================================================== -->
    <container>
     <!-- START FOOTER -->
 

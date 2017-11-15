@@ -60,7 +60,6 @@ function mainPick(a)
 	console.log("main health" , currentHealthMain);
 	$("#mainButtonChar").attr("src", Object.values(gameCharacters)[a][4]);
 	$("#mainButtonChar").attr("height", "500px");
-	$("#mainButtonChar").show();
 	$(".progress").hide();
 }
 function enemyPick(e)
@@ -80,9 +79,10 @@ function enemyPick(e)
 	$("#showCounterAttack").show();
 	$("#healthEnemy").show();
 	$(".progress").show();
+	$("#mainButtonChar").show();
 	$("#enemyBar").attr("style", "width:100%"); // visually the enemy hp bar will be shown as 100% full instead of empty
 	$(".jumbotron").hide();
-
+	$("body").addClass("bg1");
 	
 }
 
@@ -94,6 +94,7 @@ function isWin()
 
 	if (currentHealthMain < 1 && currentHealthEnemy < 1)
 	{	
+		$("body").removeClass("bg1"); // remove background from Character game center
 		$(".jumbotron").show();
 		$(".choice").html("");
 		$(".display-3").html("IT'S A TIE");
@@ -126,6 +127,7 @@ function isWin()
 	}
 	if (currentHealthMain < 1 && currentHealthEnemy > 0)
 	{	
+		$("body").removeClass("bg1"); // remove background from Character game center
 		$(".jumbotron").show();
 		$(".choice").html("");
 		$(".display-3").html("You lost against" + winMessage2);
@@ -160,6 +162,7 @@ function isWin()
 	}		
 	if (currentHealthEnemy < 1 && currentHealthMain > 0)
 	{ 
+		$("body").removeClass("bg1"); // remove background from Character game center
 		setTimeout(waitfunct, 1000);
 		$(".choice").html("You Defetead " + winMessage2);
 		$(".jumbotron").show();
@@ -190,6 +193,7 @@ function isWin()
 
 		if (enemyDefeats === 3)
 		{
+			$("body").removeClass("bg1"); // remove background from Character game center
 			$("#mainButtonChar").hide();
 			$(".jumbotron").show();
 			$(".display-3").html("YOU WIN!!!");
@@ -251,6 +255,7 @@ $(".progress").hide();
 $("#attackButton").hide();
 $("#mainButtonChar").hide();
 $("#enemyButtonChar").hide();
+$("body").removeClass("bg1"); // remove background from Character game center
 $(document).ready(function() 
 {
 
@@ -425,10 +430,10 @@ $(document).ready(function()
 
 		$("#attackButton").click(function()
 		{
-			$("#mainButtonChar").animate( {height: "+=50px", left: "+=400px"}, 200);
-			$("#mainButtonChar").animate( {height: "-=50px", left: "-=400px"}, 200);
-			$("#enemyButtonChar").animate( {height: "+=50px", left: "-=400px"}, 200);
-			$("#enemyButtonChar").animate( {height: "-=50px", left: "+=400px"}, 200);
+			$("#mainButtonChar").animate( {left: "+=50%"}, 200);
+			$("#mainButtonChar").animate( {left: "-=50%"}, 200);
+			$("#enemyButtonChar").animate( {left: "-=50%"}, 200);
+			$("#enemyButtonChar").animate( {left: "+=50%"}, 200);
 	//======================================================================================//
 	// This will refresh health of both Main and Enemy  //
 			if (gameActive == true) // this will check if the game is active 
@@ -446,8 +451,8 @@ $(document).ready(function()
 			}
 			charAnimation();
 			isWin();
-			$("#showAttack").html("Main Attack " + (currentAttackMain));
-			$("#showCounterAttack").html("Enemy Attack " + currentAttackEnemy);
+			$("#showAttack").html(winMessage1 + " :" + currentAttackMain);
+			$("#showCounterAttack").html(winMessage2 + " :" + currentAttackEnemy);
 		});
 
 });
