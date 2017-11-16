@@ -57,7 +57,7 @@ function mainPick(a)
 	console.log("click main pick" );
 	console.log("main health" , currentHealthMain);
 	$("#mainButtonChar").attr("src", Object.values(gameCharacters)[a][4]);
-	$("#mainButtonChar").attr("height", "500px");
+	$("#mainButtonChar").attr("height", "15%");
 	$(".progress").hide();
 	enemySet = false;
 	 //to allow click attack continue working this work as a wait function for the clicks
@@ -74,7 +74,7 @@ function enemyPick(e)
 	enemySet = true;
 	console.log("click enemy pick");
 	$("#enemyButtonChar").attr("src", Object.values(gameCharacters)[e][4]);
-	$("#enemyButtonChar").attr("height", "500px");
+	$("#enemyButtonChar").attr("height", "15%");
 	$("#enemyButtonChar").show();
 	$("#mainButtonChar").show();
 	$("#healthMain").show();
