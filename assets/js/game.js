@@ -53,14 +53,17 @@ function mainPick(a)
 	currentAttackMain = Object.values(gameCharacters)[a][2];
 	counterAttack = currentAttackMain;
 	winMessage1 = Object.values(gameCharacters)[a][0];
-	mainSet = true;
-	enemySet = false;
 	$(".choice").html("You Chose " + Object.values(gameCharacters)[a][0] + " now Click the character you want to Fight");
 	console.log("click main pick" );
 	console.log("main health" , currentHealthMain);
 	$("#mainButtonChar").attr("src", Object.values(gameCharacters)[a][4]);
 	$("#mainButtonChar").attr("height", "500px");
 	$(".progress").hide();
+	enemySet = false;
+	 //to allow click attack continue working this work as a wait function for the clicks
+	 for(var i = 1; i <= 1; i++) 
+	{ (function (i) { setTimeout(function() { console.log(i + " second(s) elapsed"); console.log("inside for loop"); if (i===1){mainSet = true;} console.log(clickCheck); }, i * 500); })(i); }
+
 }
 function enemyPick(e)
 {
@@ -251,7 +254,7 @@ function charAnimation()
 	 //to allow click attack continue working this work as a wait function for the clicks
 	 for(var i = 1; i <= 1; i++) 
 	{ (function (i) { setTimeout(function() { console.log(i + " second(s) elapsed"); console.log("inside for loop"); if (i===1){clickCheck = true;} console.log(clickCheck); }, i * 500); })(i); }
-	//============================OPACITY EFFECT=============================
+	//============================OPACITY=============================
 	// $("#mainButtonChar").animate({ opacity: mainOpacity });
 	// $("#enemyButtonChar").animate({ opacity: enemyOpacity });
 	//=========================REMOVED OPACITY EFFECT============================
@@ -312,7 +315,7 @@ $(document).ready(function()
 
 //===================================================================================//
 // Main Character is going to be picked here
-		$("#character1").on("dblclick", function()
+		$("#character1").on("click", function()
 		{
 			if (mainSet === false)
 			{
@@ -326,7 +329,7 @@ $(document).ready(function()
 			}
 			event.stopImmediatePropagation();
 		});  
-		$("#character2").on("dblclick", function() 
+		$("#character2").on("click", function() 
 		{
 			if (mainSet === false)
 			{
@@ -338,7 +341,7 @@ $(document).ready(function()
 			arrayHide[0] = 2;// this value will be used to compare in isWin to prevent Main Character to be shown after hidden
 			}
 		});  
-		$("#character3").on("dblclick", function()
+		$("#character3").on("click", function()
 		{
 			if (mainSet === false)
 			{
@@ -351,7 +354,7 @@ $(document).ready(function()
 			arrayHide[0] = 3;// this value will be used to compare in isWin to prevent Main Character to be shown after hidden
 			}
 		});  
-		$("#character4").on("dblclick", function() 
+		$("#character4").on("click", function() 
 		{
 			if (mainSet === false)
 			{
