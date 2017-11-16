@@ -83,7 +83,8 @@ function enemyPick(e)
 	$("#enemyBar").attr("style", "width:100%"); // visually the enemy hp bar will be shown as 100% full instead of empty
 	$(".jumbotron").hide();
 	$("body").addClass("bg1");
-	
+	$(".bg1").css("background-image", Object.values(gameCharacters)[e][5]);
+
 }
 
 
@@ -94,6 +95,7 @@ function isWin()
 console.log(currentHealthEnemy);
 	if (currentHealthMain < 1 && currentHealthEnemy < 1)
 	{	
+		$(".bg1").css("background-image", "");
 		$("body").removeClass("bg1"); // remove background from Character game center
 		$(".jumbotron").show();
 		$(".choice").html("");
@@ -129,6 +131,7 @@ console.log(currentHealthEnemy);
 	{	
 		$("#healthMain").hide("slow");
 		$("#healthEnemy").hide("slow");
+		$(".bg1").css("background-image", "");
 		$("body").removeClass("bg1"); // remove background from Character game center
 		$(".jumbotron").show("slow");
 		$(".choice").html("");
@@ -162,6 +165,7 @@ console.log(currentHealthEnemy);
 	}		
 	if (currentHealthEnemy < 1 && currentHealthMain > 0)
 	{ 
+		$(".bg1").css("background-image", "");
 		$("body").removeClass("bg1"); // remove background from Character game center
 		setTimeout(waitfunct, 1000);
 		$(".display-3").html("You win, Pick your next enemy");
@@ -194,6 +198,7 @@ console.log(currentHealthEnemy);
 
 		if (enemyDefeats === 3)
 		{
+			$(".bg1").css("background-image", "");
 			$("body").removeClass("bg1"); // remove background from Character game center
 			$("#mainButtonChar").hide();
 			$(".jumbotron").show();
@@ -246,9 +251,10 @@ function charAnimation()
 	 //to allow click attack continue working this work as a wait function for the clicks
 	 for(var i = 1; i <= 1; i++) 
 	{ (function (i) { setTimeout(function() { console.log(i + " second(s) elapsed"); console.log("inside for loop"); if (i===1){clickCheck = true;} console.log(clickCheck); }, i * 500); })(i); }
-	//==================================================================================
-	$("#mainButtonChar").animate({ opacity: mainOpacity });
-	$("#enemyButtonChar").animate({ opacity: enemyOpacity });
+	//============================OPACITY EFFECT=============================
+	// $("#mainButtonChar").animate({ opacity: mainOpacity });
+	// $("#enemyButtonChar").animate({ opacity: enemyOpacity });
+	//=========================REMOVED OPACITY EFFECT============================
 	$("#mainBar").attr("style", "width:" + mainBar +"%"); // this lines will be used to edit the bootstrap progress bar representing HP
 	$("#enemyBar").attr("style", "width:" + enemyBar +"%");// this lines will be used to edit the bootstrap progress bar representing HP
 	console.log(currentHealthEnemy);
@@ -477,8 +483,8 @@ $(document).ready(function()
 			{
 				console.log(currentHealthEnemy);
 				healthChecker();
-				$("#showAttack").html(winMessage1 + " :" + currentAttackMain);
-				$("#showCounterAttack").html(winMessage2 + " :" + currentAttackEnemy);
+				$("#showAttack").html(winMessage1 + " CP " + currentAttackMain);
+				$("#showCounterAttack").html(winMessage2 + " CP " + currentAttackEnemy);
 			}
 		});
 

@@ -151,7 +151,7 @@ filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
 
 .bg1 
 {
-  background-image: url(../images/background1.gif);
+  background-image: none;
   background-size: 100%;
   background-repeat:no-repeat;
   background-position:left center;
