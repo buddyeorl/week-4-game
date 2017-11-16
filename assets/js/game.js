@@ -18,7 +18,7 @@ var enemyDefeats = 0;
 var arrayHide = [0,false,false,false,false];
 var winMessage1 = "";
 var winMessage2 = "";
-
+var clickCheck = true; // this is the click queue variable
 function resetGame()
 {
 	attackEnemy = 0;  
@@ -91,14 +91,14 @@ function enemyPick(e)
 
 function isWin()
 {
-
+console.log(currentHealthEnemy);
 	if (currentHealthMain < 1 && currentHealthEnemy < 1)
 	{	
 		$("body").removeClass("bg1"); // remove background from Character game center
 		$(".jumbotron").show();
 		$(".choice").html("");
 		$(".display-3").html("IT'S A TIE");
-		$(".progress").hide();	
+		$(".progress").hide("slow");	
 		$("#mainButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").animate({ opacity: 1 });
 		$("#mainButtonChar").hide();
@@ -106,7 +106,7 @@ function isWin()
 		$("#healthMain").hide();
 		$("#showAttack").hide();
 		$("#showCounterAttack").hide();
-		$("#healthEnemy").hide();
+		$("#healthEnemy").hide("slow");
 		arrayHide = [0,false,false,false,false];
 		currentHealthMain; // reset main health
 		newAttack = 0;
@@ -127,19 +127,19 @@ function isWin()
 	}
 	if (currentHealthMain < 1 && currentHealthEnemy > 0)
 	{	
+		$("#healthMain").hide("slow");
+		$("#healthEnemy").hide("slow");
 		$("body").removeClass("bg1"); // remove background from Character game center
-		$(".jumbotron").show();
+		$(".jumbotron").show("slow");
 		$(".choice").html("");
 		$(".display-3").html("You lost against" + winMessage2);
-		$(".progress").hide();	
+		$(".progress").hide("slow");	
 		$("#mainButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").animate({ opacity: 1 });
 		$("#mainButtonChar").hide();
 		$("#enemyButtonChar").hide();
-		$("#healthMain").hide();
 		$("#showAttack").hide();
 		$("#showCounterAttack").hide();
-		$("#healthEnemy").hide();
 		arrayHide = [0,false,false,false,false];
 		// currentHealthMain = "Main Character Loses";
 		// currentHealthEnemy="Enemy Wins";
@@ -164,15 +164,16 @@ function isWin()
 	{ 
 		$("body").removeClass("bg1"); // remove background from Character game center
 		setTimeout(waitfunct, 1000);
+		$(".display-3").html("You win, Pick your next enemy");
 		$(".choice").html("You Defetead " + winMessage2);
 		$(".jumbotron").show();
-		$(".progress").hide();
+		$(".progress").hide("slow");
 		$("#mainButtonChar").hide();
 		$("#enemyButtonChar").hide();
 		$("#healthMain").hide();
 		$("#showAttack").hide();
 		$("#showCounterAttack").hide();
-		$("#healthEnemy").hide();
+		$("#healthEnemy").hide("slow");
 		$("#enemyButtonChar").animate({ opacity: 1 });
 		$("#enemyButtonChar").hide();
 		$("#showCounterAttack").hide(); // this will hide the enemy health when 0
@@ -200,7 +201,7 @@ function isWin()
 			$(".choice").html("You Defetead " + winMessage2);
 			setTimeout(waitfunct, 2000);
 			$(".choice").html("Play again?");
-			$(".progress").hide();
+			$(".progress").hide("slow");
 			$("#mainBar").attr("style", "width:100%"); // visually the main hp bar will be shown as 100% full instead of empty
 			$("#enemyButtonChar").hide();
 			$("#mainButtonChar").animate({ opacity: 1 });
@@ -231,23 +232,63 @@ function isWin()
 
 function charAnimation()
 {
-var mainOpacity = currentHealthMain/originalMain;
-var enemyOpacity = currentHealthEnemy/originalEnemy;
-var mainBar = (currentHealthMain/originalMain) * 100; //this will be used to set the enemy health bar in %
-var enemyBar = (currentHealthEnemy/originalEnemy) * 100; //this will be used to set the enemy health bar in %
-$("#mainButtonChar").animate({ opacity: mainOpacity });
-$("#enemyButtonChar").animate({ opacity: enemyOpacity });
-$("#mainBar").attr("style", "width:" + mainBar +"%"); // this lines will be used to edit the bootstrap progress bar representing HP
-$("#enemyBar").attr("style", "width:" + enemyBar +"%");// this lines will be used to edit the bootstrap progress bar representing HP
+	var mainOpacity = currentHealthMain/originalMain;
+	var enemyOpacity = currentHealthEnemy/originalEnemy;
+	var mainBar = (currentHealthMain/originalMain) * 100; //this will be used to set the enemy health bar in %
+	var enemyBar = (currentHealthEnemy/originalEnemy) * 100; //this will be used to set the enemy health bar in %
 
+	//==================================================================================
+	// This will move characters forward and backwards
+	$("#mainButtonChar").animate( {left: "+=50%"}, 200);
+	$("#mainButtonChar").animate( {left: "-=50%"}, 200);
+	$("#enemyButtonChar").animate( {left: "-=50%"}, 200);
+	$("#enemyButtonChar").animate( {left: "+=50%"}, 200);
+	 //to allow click attack continue working this work as a wait function for the clicks
+	 for(var i = 1; i <= 1; i++) 
+	{ (function (i) { setTimeout(function() { console.log(i + " second(s) elapsed"); console.log("inside for loop"); if (i===1){clickCheck = true;} console.log(clickCheck); }, i * 500); })(i); }
+	//==================================================================================
+	$("#mainButtonChar").animate({ opacity: mainOpacity });
+	$("#enemyButtonChar").animate({ opacity: enemyOpacity });
+	$("#mainBar").attr("style", "width:" + mainBar +"%"); // this lines will be used to edit the bootstrap progress bar representing HP
+	$("#enemyBar").attr("style", "width:" + enemyBar +"%");// this lines will be used to edit the bootstrap progress bar representing HP
+	console.log(currentHealthEnemy);
 }
+
 function waitfunct()
 {
-$(".choice").html("");
-
+	$(".choice").html();
 }
 
+	
 
+
+
+function healthChecker()
+{
+	var checkForWin = false;
+	if (gameActive == true) // this will check if the game is active 
+	{
+		if (currentHealthMain >= 0 && currentHealthEnemy >= 0)
+		{
+		clickCheck = false;
+		//newAttack = newAttack + currentAttackMain;
+		currentHealthMain=currentHealthMain - currentAttackEnemy;
+		currentHealthEnemy=currentHealthEnemy - currentAttackMain;
+		console.log("new Attack is" + currentAttackMain);
+		console.log("new health is" + currentHealthMain)
+		console.log("Conter Attack is " + counterAttack);
+		console.log("Enemy Health is " + currentHealthEnemy);
+		currentAttackMain += counterAttack;
+		charAnimation();
+		checkForWin = true;
+		}
+		
+		if (currentHealthMain <= 0 || currentHealthEnemy <= 0 && checkForWin ===true)
+		{
+			setTimeout(isWin, 500);
+		}
+	}
+}
 
 //==================================================================================
 // Main Game starts here
@@ -430,46 +471,20 @@ $(document).ready(function()
 
 		$("#attackButton").click(function()
 		{
-			$("#mainButtonChar").animate( {left: "+=50%"}, 200);
-			$("#mainButtonChar").animate( {left: "-=50%"}, 200);
-			$("#enemyButtonChar").animate( {left: "-=50%"}, 200);
-			$("#enemyButtonChar").animate( {left: "+=50%"}, 200);
 	//======================================================================================//
 	// This will refresh health of both Main and Enemy  //
-			if (gameActive == true) // this will check if the game is active 
+			if (clickCheck === true)// to work as a click queue
 			{
-				//newAttack = newAttack + currentAttackMain;
-				currentHealthMain=currentHealthMain - currentAttackEnemy;
-				currentHealthEnemy=currentHealthEnemy - currentAttackMain;
-				console.log("new Attack is" + currentAttackMain);
-				console.log("new health is" + currentHealthMain)
-				console.log("Conter Attack is " + counterAttack);
-				console.log("Enemy Health is " + currentHealthEnemy);
-				currentAttackMain += counterAttack;
-				//$("#showCounterAttack").html(counterAttack);
-				//$("#showAttack").html("changed");
+				console.log(currentHealthEnemy);
+				healthChecker();
+				$("#showAttack").html(winMessage1 + " :" + currentAttackMain);
+				$("#showCounterAttack").html(winMessage2 + " :" + currentAttackEnemy);
 			}
-			charAnimation();
-			isWin();
-			$("#showAttack").html(winMessage1 + " :" + currentAttackMain);
-			$("#showCounterAttack").html(winMessage2 + " :" + currentAttackEnemy);
 		});
+
 
 });
 
 
 	
 
-	// $(document).ready(function() {
-
- //    $("#random-button").on("click", function()
- //    {
- //      // CREATE THE MISSING CODE HERE. Your code should add content to the random-number div.
- //      // ...
- //      var random = Math.floor( Math.random() *1000);
- //      $("#random-number").html(random);
- //      //$("#random-number").append(random);
- //      // ...
-
- //    });
- //  });
