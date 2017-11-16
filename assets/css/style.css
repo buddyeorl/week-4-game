@@ -111,9 +111,9 @@ padding-top: 3%;
 padding-bottom: 3%;
 margin-bottom: 3%;
 top: 47%;
-left: 0px;
--webkit-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+left: 2px;
+-webkit-filter: drop-shadow(1.6% 1.6% 1% rgba(0,0,0,0.9));
+filter: drop-shadow(1.6% 1.6% 1% rgba(0,0,0,0.9));
 -webkit-animation: filter-animation 5s infinite;
 }
 
@@ -128,9 +128,9 @@ padding-top: 3%;
 padding-bottom: 3%;
 margin-bottom: 3%;
 top: 47%;
-right: 0px;
--webkit-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+right: 2px;
+-webkit-filter: drop-shadow(1.6% 1.6% 1% rgba(0,0,0,0.9));
+filter: drop-shadow(1.6% 1.6% 1% rgba(0,0,0,0.9));
 -webkit-animation: filter-animation 5s infinite;
 }
 
